@@ -200,3 +200,4 @@ noc-field-test/
 | `Esta tarea corresponde a X` | Estás en otro host: `ssh ops@X` |
 | `ssh: ... Connection refused` | El host se está reiniciando; usá el `ping` del paso y esperá |
 | No veo la pista | Apretá **Esc** (puede estar oculta) o abrí `?hint=big` |
+# noc-field-test
