@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOC Field Test · MW-2026-1022</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><span class="logo">◈</span> NOC<b>·FIELD</b></div>
+  <div class="ticket">
+    <span class="tag">CHG</span> MW-2026-1022 <span class="sep">/</span> Parcheo trimestral + verificación de backups
+  </div>
+  <div class="phasebar" id="phasebar"></div>
+  <div class="clock">
+    <div class="clock-label">VENTANA</div>
+    <div class="clock-val" id="clock">30:00</div>
+  </div>
+</header>
+
+<main class="grid">
+  <!-- Columna izquierda: servidores + topología -->
+  <aside class="col left">
+    <div class="panel-title">INFRAESTRUCTURA <span class="live">● EN VIVO</span></div>
+    <div id="servers"></div>
+    <div class="panel-title">TOPOLOGÍA</div>
+    <svg id="topo" viewBox="0 0 280 170" aria-label="Topología de red"></svg>
+  </aside>
+
+  <!-- Centro: terminal + log -->
+  <section class="col center">
+    <div class="objective">
+      <span class="obj-label">OBJETIVO</span>
+      <span id="objective">—</span>
+      <span class="obj-step" id="stepcount"></span>
+    </div>
+    <div class="term" id="term">
+      <div class="term-out" id="out"></div>
+      <div class="term-line">
+        <span class="prompt" id="prompt">ops@bastion:~$</span>
+        <input id="cmd" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Terminal">
+      </div>
+    </div>
+    <div class="stream-title">LOG AGREGADO · syslog / nginx / postgres / ufw</div>
+    <div class="stream" id="stream"></div>
+  </section>
+
+  <!-- Derecha: alertas + checklist -->
+  <aside class="col right">
+    <div class="panel-title">ALERTAS</div>
+    <div id="alerts" class="alerts"></div>
+    <div class="panel-title">PLAN DE LA VENTANA</div>
+    <div id="phases" class="phases"></div>
+  </aside>
+</main>
+
+<!-- Pista casi invisible: el comando que toca tipear -->
+<div id="hint" title="Clic para copiar"></div>
+
+<!-- Pantalla de briefing -->
+<div class="overlay" id="brief">
+  <div class="card">
+    <div class="card-tag">CONTROL DE CAMBIOS · AUTORIZADO</div>
+    <h1>Ventana de mantenimiento MW-2026-1022</h1>
+    <p class="lead">Es una madrugada de jueves. Tenés <b>30 minutos</b> para parchear la capa web,
+      resolver un incidente en la base de datos, validar los backups y cerrar los hallazgos de seguridad.</p>
+    <div class="brief-grid">
+      <div><h3>Qué vas a hacer</h3>
+        <ul>
+          <li>Parcheo y reinicio de web-01 y web-02</li>
+          <li>Disco lleno en db-01 (causa raíz + limpieza)</li>
+          <li>Prueba de restauración de backup en bak-01</li>
+          <li>Fuerza bruta SSH, puerto expuesto y certificado TLS</li>
+        </ul></div>
+      <div><h3>Cómo se juega</h3>
+        <ul>
+          <li>Escribí los comandos en la terminal.</li>
+          <li>El comando exacto aparece <b>muy chico</b> abajo a la derecha.</li>
+          <li><kbd>Tab</kbd> autocompleta, <kbd>↑</kbd> historial, <kbd>Esc</kbd> oculta la pista.</li>
+          <li>Conectate con <code>ssh</code> cuando el paso lo pida.</li>
+        </ul></div>
+    </div>
+    <button class="btn" id="startBtn">INICIAR VENTANA ▸</button>
+    <div class="fine">Simulación. No se ejecuta nada real y no hay conexiones a servidores.</div>
+  </div>
+</div>
+
+<!-- Pantalla final -->
+<div class="overlay hidden" id="end">
+  <div class="card">
+    <div class="card-tag" id="endTag">VENTANA CERRADA</div>
+    <h1 id="endTitle">Mantenimiento completado</h1>
+    <div class="stats" id="endStats"></div>
+    <div class="btnrow">
+      <a class="btn alt" id="dl" href="#">Descargar reporte (.md)</a>
+      <button class="btn" id="again">Jugar de nuevo ▸</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
